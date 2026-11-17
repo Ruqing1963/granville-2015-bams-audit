@@ -20,7 +20,7 @@
 \newcommand{\tp}{t'}
 
 \title[Variational and exponential-sum estimates in Granville's survey]{A note on the variational and exponential-sum estimates in Granville's \texorpdfstring{\lq\lq Primes in intervals of bounded length\rq\rq}{"Primes in intervals of bounded length"}}
-\thanks{Code and data: \url{https://github.com/Ruqing1963/granville-2015-bams-audit} (archived at Zenodo, \url{https://doi.org/10.5281/zenodo.24296047}).}
+\thanks{Code and data are archived at Zenodo, \href{https://doi.org/10.5281/zenodo.24296047}{doi:10.5281/zenodo.24296047};\\ repository: \href{https://github.com/Ruqing1963/granville-2015-bams-audit}{github.com/Ruqing1963/granville-2015-bams-audit}.}
 \author{Ruqing Chen}
 \address{GUT Geoservice Inc., Montreal, Canada}
 \email{ruqing@hotmail.com}
@@ -177,14 +177,16 @@ Let $k\ge e^{7}$ and $A=\log k-2\log\log k$. Then
 \end{proposition}
 
 \begin{proof}
-If $s\le1-T/k$, then $g(kt_k)=0$ for $t_k\ge1-s$, so $B(\tp)=0$ and $(A-B)^2=A^2$. Discarding the rest of
+The idea is to keep only the region where the tail $B$ vanishes identically. There the integrand of
+\eqref{eq:N} is exactly $A^2$, so neither the cross term $2AB$ nor the Cauchy--Schwarz bound for $B^2$
+is needed. Precisely, if $s\le1-T/k$, then $g(kt_k)=0$ for $t_k\ge1-s$, so $B(\tp)=0$ and $(A-B)^2=A^2$. Discarding the rest of
 \eqref{eq:N} and putting $u_i=kt_i$, we get
 \[
 N_k\ge k\int_{s\le1-T/k}A(\tp)^2\dd\tp=k^{-k}\gamma^{k-1}\bigl(1-\Pr[S_{k-1}>k-T]\bigr).
 \]
 Here $S_{k-1}$ is a sum of $k-1$ independent variables with density $g^2/\gamma$ on $[0,T]$. Their mean is
-$1-\eta$ and their variance is $v\le\int u^2g^2/\gamma\le e^A/(A^2(1-e^{-A}))$. This avoids the
-Cauchy--Schwarz step and with it the loss $T\approx e^A/A$. By Chebyshev's inequality,
+$1-\eta$ and their variance is $v\le\int u^2g^2/\gamma\le e^A/(A^2(1-e^{-A}))$. In particular,
+the factor $T\approx e^A/A$ lost in the Cauchy--Schwarz step does not appear. By Chebyshev's inequality,
 \[
 \Pr[S_{k-1}>k-T]\le P:=\frac{(k-1)v}{\bigl((k-1)\eta+1-T\bigr)^2}.
 \] For $\ell\ge7$ we have $A\ge3.1$, so
