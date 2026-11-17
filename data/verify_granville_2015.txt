@@ -1,0 +1,97 @@
+========================================================================
+1. Symbolic checks
+========================================================================
+[PASS] gamma = (1-e^{-A})/A
+[PASS] mu = (A-1+e^{-A})/A^2
+[PASS] int t^2 g^2 = (e^A-2A-e^{-A})/A^3
+[PASS] int g = 1
+[PASS] eta = 1-mu/gamma = (1-(A+1)e^{-A})/(A(1-e^{-A}))
+   eta_printed - eta_true = 2/(A*(exp(A) - 1))
+[PASS] eta_printed - eta_true = 2e^{-A}/(A(1-e^{-A})) (nonzero)
+[PASS] (6.8) middle term with eta_true: e^{2A}/(Ak) (1-2Ae^{-A}-e^{-2A})(1-e^{-A})^2/(1-(A+1)e^{-A})^2
+[PASS] 1/gamma = A/(1-e^{-A})
+[PASS] (1-(A+1)x)^2 - (1-x)^2(1-2Ax-x^2) = x^2(A-1+x)^2  => R(A) <= 1
+[PASS] p.200 variance line: int g^2 (u^2-mu^2/gamma^2) == int g^2 (u-mu/gamma)^2 (printed line is CORRECT)
+[PASS] Young: (a-b)^2 - (1-th)(a^2-b^2/th) = (sqrt(th)a - b/sqrt(th))^2
+[PASS] (a-b)^2 - (a^2-b^2) = -2b(a-b)  (<= 0 for 0<=b<=a)
+[PASS] max_theta (1-theta)(a-b/theta) = (sqrt a - sqrt b)^2 at theta = sqrt(b/a)
+========================================================================
+2. Scaling of M_k (p.200): literal definition vs printed bound
+========================================================================
+   Cauchy on t_k-interval of length <= T/k:  (int_tail g(kt))^2 <= (T/k) int_tail g(kt)^2.
+   Literal M_k (no factor k):  M_k <= (T/k) * k^{-k} int_{sum u>=k} prod g(u_i)^2  = k^{-k-1} T (...)
+   Printed bound k^{-k} T (...) is the bound for k*M_k, i.e. the factor k was dropped in the definition.
+========================================================================
+3. Exact numerics: N_k vs L_k - k M_k, and rho(F)
+========================================================================
+   (a) Integrated ratios with fixed A = 2 (T = 3.19) and A = 3 (T = 6.36)
+      k   A      N_k/L_k   (L_k-kM_k)/L_k         gap
+      2   2     0.439660         0.801236   3.616e-01
+      3   2     0.551289         0.821448   2.702e-01
+      5   2     0.699826         0.867233   1.674e-01
+     10   2     0.856747         0.930140   7.339e-02
+     20   2     0.958429         0.978374   1.994e-02
+     50   2     0.998415         0.999133   7.183e-04
+      2   3     0.301557         0.722377   4.208e-01
+      3   3     0.363571         0.729602   3.660e-01
+      5   3     0.458153         0.745962   2.878e-01
+     10   3     0.625380         0.800310   1.749e-01
+     20   3     0.778631         0.871491   9.286e-02
+     50   3     0.934194         0.958862   2.467e-02
+[PASS] N_k < L_k - k M_k strictly for every tested k and A
+   (b) Exact rho(F) at Granville's choice A = (log k + log log k)/2 vs his claimed bound
+       k       A  rho(F) exact  claim: (l+loglog)/2-2  Tao upper
+       5  1.0427      1.554028              -0.957339     2.0118
+      10  1.5683      1.921602              -0.431691     2.5584
+      20  2.0465      2.300030               0.046460     3.1534
+      50  2.6380      2.810341               0.638039     3.9919
+     100  3.0662      3.198385               1.066175     4.6517
+     200  3.4829      3.584948               1.482853     5.3249
+     500  4.0208      4.092160               2.020755     6.2271
+    1000  4.4202      4.473563               2.420200     6.9147
+[PASS] exact rho(F) exceeds Granville's claimed lower bound at all tested k (the conclusion survives)
+[PASS] exact rho(F) below Tao's upper bound k log k/(k-1)
+========================================================================
+4. Repaired lower bounds
+========================================================================
+[PASS] R(A) <= 1 on A in [1,60] (so no 'borrowing' is needed for (6.8))
+[PASS] Prop 2: Chebyshev form at A = l - 2 log l  >=  log k - 2 log log k - 1/2  for log k in [7,200]
+   min over grid of [Prop2 exact - (l - 2 log l)] = -0.0434
+[PASS] analytic tail bound P <= 1/(0.563 (log k)^2) on log k in [7,200]
+[PASS] A = l - 2 log l >= 3 at l = 7.000
+[PASS] A = l - 2 log l >= 3 at l = 7.129
+[PASS] A = l - 2 log l >= 3 at l = 7.258
+    log k  claim(6.8)  Prop1 simple  Prop1 opt  Prop2 A=l-2logl  Prop2 opt  l-2loglog l-1/2
+        8      3.0397        2.2500     2.4947           3.8749     5.0642           3.3411
+       10      4.1513        3.2000     3.4199           5.3691     6.7908           4.8948
+       12      5.2425        4.1667     4.3805           6.9884     8.5910           6.5302
+       15      6.8540        5.6333     5.8527           9.5418    11.3597           9.0839
+       20      9.4979        8.1000     8.3359          13.9734    16.0657          13.5085
+       30     14.7006       13.0667    13.3249          23.1718    25.6510          22.6976
+       40     19.8444       18.0500    18.3201          32.6018    35.3566          32.1222
+       60     30.0472       28.0333    28.3155          51.7969    54.9421          51.3113
+      100     50.3026       48.0200    48.3120          90.7806    94.4215          90.2897
+[PASS] Prop 1 optimum >= simple bound l/2 - 2 + 2/l
+========================================================================
+5. Theorem 6.4: k minimal with k log k > e^{8m+4}; need rho(F) > 4m
+========================================================================
+     m   log k_m  Prop2 clean   4m  Prop1 simple  Prop1 opt
+     1    9.7253       4.6759    4        3.0683     3.2902
+     2   17.1576      10.9727    8        6.6953     6.9219
+     3   24.7896      17.8687   12       10.4755    10.7240
+     4   32.5182      25.0546   16       14.3206    14.5825
+     5   40.3036      32.4107   20       18.2014    18.4718
+     6   48.1262      39.8785   24       22.1046    22.3809
+    10   79.6227      70.3681   40       37.8365    38.1247
+    50  398.0135     385.5405  200      197.0118   197.3149
+[PASS] Prop 2 gives rho(F) > 4m at k = k_m for every m in 1..60 (Theorem 6.4 recovered as stated)
+   Prop 1 (Young) fails to give rho > 4m at k_m for m in: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]... (60 of 60)
+[PASS] Prop 1 gives rho > 4m as soon as log k > 8m+4 (Theorem 6.4 with k log k replaced by k)
+========================================================================
+6. Section 11.2: e_q(y) = e_{q1}(y * inv(q2) mod q1) e_{q2}(y * inv(q1) mod q2)
+========================================================================
+[PASS] CRT identity holds with modular inverses (2000 random coprime pairs)
+   With real division (e_m(t)=e(t/m) read literally) the identity fails in 1986/2000 cases
+[PASS] f(n + k q1) == f(n) (mod q1) for rational f, so e_{q1}(inv(q2) f(n+kq1)) = e_{q1}(inv(q2) f(n))
+========================================================================
+TOTAL FAILURES: 0
