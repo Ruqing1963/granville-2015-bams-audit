@@ -32,18 +32,18 @@
 \begin{abstract}
 We revisit the self-contained lower bound for Maynard's ratio $\rho(F)$ in Sections~6.8--6.9 of
 A.~Granville's survey \emph{Primes in intervals of bounded length} (Bull.\ Amer.\ Math.\ Soc.\ \textbf{52}
-(2015), 171--222). (i) The numerator of $\rho(F)$ is rewritten there as $L_k-M_k$; in fact
-$k\int(A-B)^2\le L_k-kM_k$, so the identity is an \emph{upper} bound, while the argument needs a lower
-bound. In addition the factor $k$ is missing from the definition of $M_k$. (ii) The parameter $\eta$ in
-Section~6.9 should read $\eta=(1-(A+1)e^{-A})/(A(1-e^{-A}))$, not $(1-(A-1)e^{-A})/(\cdots)$. The final
-inequality in (6.8) is nevertheless correct, by the identity
-$(1-(A+1)x)^2-(1-x)^2(1-2Ax-x^2)=x^2(A-1+x)^2$. (iii) We give two repairs. Young's inequality yields
-$\rho(F)\ge\frac12\log k-2$, which proves Theorem~6.4 under $k>e^{8m+4}$ instead of
-$k\log k>e^{8m+4}$. Truncating the support in $k-1$ variables yields
-$\rho(F)\ge\log k-2\log\log k-\frac12$ for $k\ge e^{7}$, and this recovers Theorem~6.4 and
-Corollary~6.5 exactly as stated. (iv) We also record a wrong Fourier cutoff in Section~9.3, a notational
-ambiguity in Section~11.2, and two misprints. We checked two further suspected slips and both are
-correct as printed.
+(2015), 171--222). (i) The survey rewrites the numerator of $\rho(F)$ as $L_k-M_k$. In fact
+$k\int(A-B)^2\le L_k-kM_k$, with strict inequality, so this is an \emph{upper} bound, whereas the
+argument needs a lower bound. Moreover, the factor $k$ is missing from the definition of $M_k$.
+(ii) The parameter $\eta$ in Section~6.9 should be $(1-(A+1)e^{-A})/(A(1-e^{-A}))$, not
+$(1-(A-1)e^{-A})/(A(1-e^{-A}))$. The final inequality in (6.8) is nevertheless correct, because
+$(1-(A+1)x)^2-(1-x)^2(1-2Ax-x^2)=x^2(A-1+x)^2$. (iii) We give two rigorous repairs. Young's inequality
+gives $\rho(F)\ge\frac12\log k-2$, which proves Theorem~6.4 under $k>e^{8m+4}$ in place of
+$k\log k>e^{8m+4}$. Truncating the support in $k-1$ variables gives
+$\rho(F)\ge\log k-2\log\log k-\frac12$ for $k\ge e^{7}$. This recovers Theorem~6.4 and Corollary~6.5
+exactly as stated. (iv) In Part~2 we correct a Fourier cutoff in Section~9.3 and two misprints, and we
+resolve a notational ambiguity in Section~11.2. Two further passages that look like slips are correct as
+printed.
 \end{abstract}
 \maketitle
 
@@ -56,11 +56,19 @@ between primes. Its Section~6 contains a short self-contained proof that the May
 {\int_{t_1,\dots,t_k\ge0}F^2\dd t_k\cdots\dd t_1}
 \]
 can be made larger than $4m$. This leads to Theorem~6.4 (if $k\log k>e^{8m+4}$, then any admissible
-$k$-tuple has at least $m$ prime values infinitely often) and to Corollary~6.5 ($B_m=e^{8m+5}$). We check
-this argument line by line and find one gap, which is that an inequality is used in the wrong direction.
-We give two repairs, one of which recovers the stated results without change. We also checked the
-exposition of Zhang's theorem in Part~2. All page numbers refer to \cite{G}. Every identity and number
-below was checked by a short program provided as supplementary material.
+$k$-tuple has at least $m$ prime values infinitely often) and to Corollary~6.5 ($B_m=e^{8m+5}$).
+
+We check this argument line by line and find one genuine gap: an inequality is used in the wrong
+direction (Section~\ref{sec:68}). The other slips in Sections~6.8--6.9 turn out to be harmless
+(Section~\ref{sec:69}). In Section~\ref{sec:repair} we close the gap in two ways. The first keeps
+Granville's variance method and absorbs the cross term by Young's inequality. The second avoids the cross
+term by truncating the support, and it recovers Theorem~6.4 and Corollary~6.5 without change.
+Section~\ref{sec:part2} collects remarks on the exposition of Zhang's theorem in Part~2.
+
+All page numbers refer to \cite{G}. The identities were verified symbolically, and the numbers were
+checked independently in two ways. First, we computed $\rho(F)$ exactly, up to discretisation, by FFT
+convolution of the relevant probability law. Second, we evaluated the Young and Chebyshev bounds
+directly. The program is provided as supplementary material.
 
 \section{The numerator of \texorpdfstring{$\rho(F)$}{rho(F)} in Section~6.8}\label{sec:68}
 
@@ -84,11 +92,11 @@ N_k=L_k-k\int_{\tp\ge0}\bigl(2AB-B^2\bigr)\dd\tp\ \le\ L_k-kM_k ,
 \end{equation}
 and the inequality is strict as soon as $0<B<A$ on a set of positive measure. This always happens: if
 $T>1$ (equivalently $A>0$ in Section~6.9) then $B$ vanishes for $s\le1-T/k$ and equals $A$ for $s\ge1$,
-and $0<B<A$ in between. So $L_k-kM_k$ is an upper bound for the numerator. The next step, inequality
-(6.7), uses it as a lower bound. To repair this one has to control the cross term $2AB$. In $AB$ the tail
-integral $\int_{t_k\ge1-s}g(kt_k)\dd t_k$ appears to the first power. The Cauchy--Schwarz step on
-p.~200 bounds the \emph{square} of this integral by $(T/k)\int_{t_k\ge1-s}g(kt_k)^2\dd t_k$, so it does
-not apply to $AB$ as it stands. Table~\ref{tab:num} and the inset of Figure~\ref{fig:main}(a) show that
+and $0<B<A$ in between. Thus $L_k-kM_k$ is an upper bound for the numerator, but inequality (6.7)
+treats it as a lower bound. Closing the gap requires a bound for the cross term $2AB$. In $AB$ the tail
+integral $\int_{t_k\ge1-s}g(kt_k)\dd t_k$ appears only to the first power. The Cauchy--Schwarz step on
+p.~200 bounds the \emph{square} of this integral by $(T/k)\int_{t_k\ge1-s}g(kt_k)^2\dd t_k$, and so it
+does not apply to $AB$ as it stands. Table~\ref{tab:num} and the inset of Figure~\ref{fig:main}(a) show that
 the gap in \eqref{eq:rev} is large for small $k$.
 
 \subsection*{The missing factor \texorpdfstring{$k$}{k}}
@@ -177,7 +185,9 @@ N_k\ge k\int_{s\le1-T/k}A(\tp)^2\dd\tp=k^{-k}\gamma^{k-1}\bigl(1-\Pr[S_{k-1}>k-T
 Here $S_{k-1}$ is a sum of $k-1$ independent variables with density $g^2/\gamma$ on $[0,T]$. Their mean is
 $1-\eta$ and their variance is $v\le\int u^2g^2/\gamma\le e^A/(A^2(1-e^{-A}))$. This avoids the
 Cauchy--Schwarz step and with it the loss $T\approx e^A/A$. By Chebyshev's inequality,
-$\Pr[S_{k-1}>k-T]\le P:=(k-1)v/((k-1)\eta+1-T)^2$. For $\ell\ge7$ we have $A\ge3.1$, so
+\[
+\Pr[S_{k-1}>k-T]\le P:=\frac{(k-1)v}{\bigl((k-1)\eta+1-T\bigr)^2}.
+\] For $\ell\ge7$ we have $A\ge3.1$, so
 $\eta\ge(1-4e^{-3})/A\ge0.8/A$ and $T\le e^A/A=k/(A\ell^2)$. Hence $(k-1)\eta+1-T\ge(0.8-\ell^{-2})k/A\ge0.77\,k/A$
 and $P\le e^A/(0.56\,k)=1/(0.56\,\ell^2)$. Therefore
 $\rho(F)\ge A(1-P)\ge A-1/(0.56\,\ell)\ge\ell-2\log\ell-0.26$.
@@ -240,7 +250,7 @@ $e_q(f(n+kq_1))=e_{q_1}(f(n)/q_2)\,e_{q_2}(f(n+kq_1)/q_1)$ is false if \lq\lq$/q
 division, which is how $e_m(t)=e(t/m)$ is defined on p.~210. In that case the right side equals
 $e_q(f(n))e_q(f(n+kq_1))$. Our test with random coprime $q_1,q_2$ and integer arguments found the
 identity false in $1986$ of $2000$ cases. The paper elsewhere uses \lq\lq$/$\rq\rq\ inside $e_q(\cdot)$
-for division modulo the modulus ($C_1/n$ in (10.2), and \lq\lq$\pmod{q_2}$\rq\rq\ in $g_{k,k'}$). Under
+for division modulo the modulus ($C_1/n$ in (10.2), and \lq\lq$(\mathrm{mod}\ q_2)$\rq\rq\ in $g_{k,k'}$). Under
 that reading the identity is correct for squarefree $q=q_1q_2$:
 \[
 e_q(f(n+kq_1))=e_{q_1}\bigl(\overline{q_2}\,f(n+kq_1)\bigr)\,e_{q_2}\bigl(\overline{q_1}\,f(n+kq_1)\bigr)
